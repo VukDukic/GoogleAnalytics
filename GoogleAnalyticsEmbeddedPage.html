@@ -5,3 +5,53 @@
 <input type="hidden" name="txt_content" id="Content" value="" />
 
 <!-- Value for the hidden fields can be read form the GA cookie__utmz.  The code will parse out the campaign variables 
+from the GA cookies and make them available in 5 variables.  
+
+Logic should be put in place within the form to pass the values of the hidden fields to their corresponding fields within Salesforce 
+when the form issubmitted.
+
+Place the following code on every page on your website that has a Salesforce from before the closing </body> tag. -->
+
+<script type="text/javascript">
+var z = _uGC(document.cookie, '__utmz=', ';');
+var source = _uGC(z, 'utmcsr=', '|');
+var medium = _uGC(z, 'utmcmd=', '|');
+var term = _uGC(z, 'utmctr=', '|');
+var content = _uGC(z, 'utmcct=', '|');
+var campaign = _uGC(z, 'utmccn=', '|');
+var gclid = _uGC(z, 'utmgclid=', '|');
+if (gclid !="-") {
+ source = 'google';
+ medium = 'cpc';
+}
+
+var csegment = _uGC(document.cookie, '__utmv=', ';');
+if (csegment != '-') {
+ var csegmentex = /[1-9]*?\.(.*)/;
+ csegment = csegment.match(csegmentex);
+ csegment = csegment[1];
+
+} else {
+ csegment = '';
+}
+
+function _uGC(l,n,s)
+{
+if (!l || l=="" || !n || n=="" || !s || s=="") return "-";
+var i,i2,i3,c="-";
+i=l.indexOf(n);
+i3=n.indexOf("=")+1;
+if (i > -1) {
+i2=l.indexOf(s,i); if (i2 < 0){ i2=l.length; }
+c=l.substring((i+i3),i2);
+}
+return c;
+}
+
+document.getElementById("txt_medium").value =medium; /* Campaign_Medium */
+document.getElementById("txt_source").value =source; /* Campaign_Source */
+document.getElementById("txt_campaign_name").value =campaign; /* Campaign_CampaignName */
+document.getElementById("txt_term").value =term; /* Campaign_Term */
+document.getElementById("txt_content").value =content; /* Campaign_Content */
+
+</script>
