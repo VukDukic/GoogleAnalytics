@@ -1,3 +1,5 @@
+Campaign tracking JS code, that creates a new first-party cookie where you can save your campaigns data over long period of time. Excellent replacement for the UTMZ cookie that was discontinued in Universal Analytics. This project includes UTMZ cookie data migration so you don't lose old campaign data. The code can be implemented …
+
 utm-alternative
 This new project aim is to provide the ability to use campaign data values inside the DOM (such as in forms). Many of us in the past added campaign data to our CRM (such as Salesforce) with Google Analytics UTMZ cookies, but with the move to Universal Analytics (UA), it's not possible to retrieve UTMZ cookie values anymore, since Universal Analytics script does not store campaign data on a cookie. This project then 1) creates a new cookie, "traffic_source", which tracks the campaign data based on a fixed query string parameter, SRC (read more below) 2) Stores the existing UTMZ campaign value of returning users so old campaign data won't be lost.
 
